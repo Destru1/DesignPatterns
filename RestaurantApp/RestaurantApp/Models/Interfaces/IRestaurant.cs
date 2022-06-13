@@ -13,6 +13,7 @@ namespace RestaurantApp.Models.Interfaces
 
         string ShowClientBill(string clientName);
 
+        string ShowMenu();
         void EarnedToday();
 
         IClient FindClientByName(string name);

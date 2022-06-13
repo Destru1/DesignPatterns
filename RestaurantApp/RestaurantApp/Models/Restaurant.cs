@@ -66,20 +66,19 @@ namespace RestaurantApp.Models
 
             Client client = (Client)FindClientByName(clientName);
 
-            string message = this.clientMeal[client].Count == 0 ? "Bill: nothing ordered for" : "Bill for";
+            string message = this.clientMeal[client].Count == 0 ? "Nothing ordered from" : "Bill for";
 
             stringBuilder.AppendLine(message + " " + client.Name);
             foreach (var item in this.clientMeal[client])
             {
                 stringBuilder.AppendLine(item.Name.ToString() + " " + item.Price.ToString());
 
-
             }
 
             decimal currentBalance = client.Balance;
             string totalBalanceMessage = $"Total {currentBalance}$";
-            stringBuilder.AppendLine(new string('-', 20));
-            stringBuilder.AppendLine(totalBalanceMessage);
+            stringBuilder.AppendLine(new string(' ', 20) + totalBalanceMessage);
+            stringBuilder.AppendLine(new string('-', 35));
 
             return stringBuilder.ToString().Trim();
         }
@@ -94,10 +93,20 @@ namespace RestaurantApp.Models
                 throw new Exception(message);
 
             }
-            client.Balance = client.Balance - meal.Price;
+            client.Balance -= meal.Price;
             this.clientMeal[client].Remove(meal);
 
 
+        }
+        public string ShowMenu()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var item in this.meals)
+            {
+                stringBuilder.AppendLine($"{item.Name} {item.Price}$"); 
+            }
+
+            return stringBuilder.ToString();
         }
 
         public void EarnedToday()
@@ -108,7 +117,7 @@ namespace RestaurantApp.Models
             {
                 earnedToday += item.Balance;
             }
-            string message = $"Today's total: {earnedToday}";
+            string message = $"Today's total: {earnedToday}$.";
 
             writer.WriteLine(message);
 

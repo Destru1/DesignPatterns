@@ -82,7 +82,7 @@ namespace RestaurantApp.Models.Clients
 
         private Meal FindMealByName(string mealName)
         {
-            return this.meals.FirstOrDefault(m => m.Name.ToLower() == mealName.ToLower());
+            return this.meals.SingleOrDefault(m => m.Name.ToLower() == mealName.ToLower());
         }
 
         private void ValidateName(string name)

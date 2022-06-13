@@ -1,17 +1,17 @@
 ﻿using RestaurantApp.Commands.Interfaces;
 using RestaurantApp.Models.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace RestaurantApp.Commands
 {
-    public class BillCommand : ICommand
+    public class MenuCommand : ICommand
     {
-
         public string Execute(IRestaurant restaurant, params string[] arguments)
         {
-            string clientName = arguments[0].ToString();
-            string showBill = restaurant.ShowClientBill(clientName);
-
-            return showBill;
+            string message = restaurant.ShowMenu();
+            return message;
         }
     }
 }
