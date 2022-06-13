@@ -15,6 +15,9 @@ namespace RestaurantApp.Models.Interfaces
         void RemoveMealFromClient(Client client,Meal meal);
 
         string ShowClientBill(string clientName);
+
+        void EarnedToday();
+
         IClient FindClientByName(string name);
     }
 }

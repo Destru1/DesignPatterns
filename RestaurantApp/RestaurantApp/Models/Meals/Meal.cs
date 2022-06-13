@@ -16,13 +16,5 @@ namespace RestaurantApp.Models.Meals
         public decimal Price { get; set; }
 
 
-        public override string ToString()
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine($"{this.GetType().Name}");
-            stringBuilder.AppendLine($"{this.Price}");
-
-            return stringBuilder.ToString().Trim();
-        }
     }
 }

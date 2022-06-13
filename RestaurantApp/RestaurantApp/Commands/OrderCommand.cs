@@ -1,4 +1,5 @@
 ﻿using RestaurantApp.Commands.Interfaces;
+using RestaurantApp.Constants;
 using RestaurantApp.Models;
 using RestaurantApp.Models.Clients;
 using RestaurantApp.Models.Interfaces;
@@ -18,7 +19,7 @@ namespace RestaurantApp.Commands
             
             IClient client = restaurant.FindClientByName(clientName);
             client.GetMeal(mealName);
-            string message = "Meal added";
+            string message = string.Format(OutputMessages.MEAL_ADDED_TO_CLIENT, mealName, clientName);
            return message ;
 
         }

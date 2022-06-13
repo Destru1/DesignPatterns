@@ -1,4 +1,7 @@
-﻿using RestaurantApp.Helpers;
+﻿using RestaurantApp.Constants;
+using RestaurantApp.Helpers;
+using RestaurantApp.IO;
+using RestaurantApp.IO.Interfaces;
 using RestaurantApp.Models.Clients;
 using RestaurantApp.Models.Interfaces;
 using RestaurantApp.Models.Meals;
@@ -14,26 +17,33 @@ namespace RestaurantApp.Models
         private readonly ICollection<Meal> meals;
         private readonly ICollection<Client> clients;
         private readonly IDictionary<Client, List<Meal>> clientMeal;
+        private readonly IWriter writer;
         public Restaurant()
         {
             this.meals = GlobalConstants.Meals;
             this.clients = new List<Client>();
             this.clientMeal = new Dictionary<Client, List<Meal>>();
+            this.writer = new ConsoleWriter();
+
 
         }
+
         public string RegisterClient(Client client)
         {
             bool isAlreadyRegistered = this.clients.Any(c => c.Name == client.Name);
 
             if (isAlreadyRegistered)
             {
-                //TODO error message
+                string errorMessage = string.Format(ExceptionMessages.CLIENT_ALREADY_REGISTERED, client.Name);
+                throw new ArgumentException(errorMessage);
+
             }
+
             this.clients.Add(client);
             this.clientMeal.Add(client, new List<Meal> { });
             client.Restaurant = this;
 
-            string message = $"Client {client.Name} registered.";
+            string message = string.Format(OutputMessages.CLIENT_REGISTERED, client.Name);
 
             return message;
         }
@@ -50,38 +60,25 @@ namespace RestaurantApp.Models
 
 
 
-        public IClient FindClientByName(string name)
-        {
-            IClient client = this.clients.SingleOrDefault(x => x.Name.ToLower() == name.ToLower());
-
-            bool isNull = CustomValidator.IsNull(client);
-            if (isNull)
-            {
-                //Todo exception msg client not found
-            }
-
-
-            return client;
-        }
-
         public string ShowClientBill(string clientName)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
             Client client = (Client)FindClientByName(clientName);
 
-            string message = this.clientMeal[client].Count == 0 ? "Bill: nothing ordered" : "Bill:";
+            string message = this.clientMeal[client].Count == 0 ? "Bill: nothing ordered for" : "Bill for";
 
-            stringBuilder.AppendLine(message);
+            stringBuilder.AppendLine(message + " " + client.Name);
             foreach (var item in this.clientMeal[client])
             {
                 stringBuilder.AppendLine(item.Name.ToString() + " " + item.Price.ToString());
-                
-                
+
+
             }
 
             decimal currentBalance = client.Balance;
-            string totalBalanceMessage = $"Total {currentBalance}";
+            string totalBalanceMessage = $"Total {currentBalance}$";
+            stringBuilder.AppendLine(new string('-', 20));
             stringBuilder.AppendLine(totalBalanceMessage);
 
             return stringBuilder.ToString().Trim();
@@ -93,13 +90,46 @@ namespace RestaurantApp.Models
 
             if (isValid == false)
             {
-                //TODO Exception invalid meal
+                string message = string.Format(ExceptionMessages.MEAL_NOT_FOUND_IN_CLIENT_ORDER, meal, client);
+                throw new Exception(message);
+
             }
             client.Balance = client.Balance - meal.Price;
             this.clientMeal[client].Remove(meal);
 
-            
+
         }
+
+        public void EarnedToday()
+        {
+            decimal earnedToday = 0;
+
+            foreach (var item in this.clients)
+            {
+                earnedToday += item.Balance;
+            }
+            string message = $"Today's total: {earnedToday}";
+
+            writer.WriteLine(message);
+
+
+        }
+        public IClient FindClientByName(string name)
+        {
+            IClient client = this.clients.SingleOrDefault(x => x.Name.ToLower() == name.ToLower());
+
+            bool isNull = CustomValidator.IsNull(client);
+            if (isNull)
+            {
+                string message = string.Format(ExceptionMessages.CLIENT_NOT_FOUND, name);
+                throw new Exception(message);
+
+            }
+
+
+            return client;
+        }
+
 
         private Meal FindMealByName(string mealName)
         {
@@ -117,5 +147,6 @@ namespace RestaurantApp.Models
 
             return meal;
         }
+
     }
 }

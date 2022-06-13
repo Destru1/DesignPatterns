@@ -1,4 +1,5 @@
-﻿using RestaurantApp.Helpers;
+﻿using RestaurantApp.Constants;
+using RestaurantApp.Helpers;
 using RestaurantApp.Models.Interfaces;
 using RestaurantApp.Models.Meals;
 using System;
@@ -28,13 +29,22 @@ namespace RestaurantApp.Models.Clients
 
         public string Name
         {
-            get => this.name;
-            private set { this.name = value; }
+            get
+            {
+                return this.name;
+            }
+
+            private set
+            {
+                this.ValidateName(value);
+                this.name = value;
+            }
         }
 
         public decimal Balance
         {
-            get => balance; set
+            get => balance;
+            set
             {
                 balance = value;
             }
@@ -54,9 +64,8 @@ namespace RestaurantApp.Models.Clients
                 this.balance += amount;
 
             }
-   
-
         }
+
         public void RemoveMeal(string mealName)
         {
             Meal meal = this.FindMealByName(mealName);
@@ -64,16 +73,27 @@ namespace RestaurantApp.Models.Clients
             bool isNull = CustomValidator.IsNull(meal);
             if (isNull)
             {
-                //Todo exception message invalid item
+                string message = String.Format(ExceptionMessages.INVALID_MEAL_MESSAGE, mealName);
+                throw new Exception(message);
             }
 
             this.meals.Remove(meal);
             this.Restaurant.RemoveMealFromClient(this, meal);
         }
-       
+
         private Meal FindMealByName(string mealName)
         {
             return this.meals.FirstOrDefault(m => m.Name.ToLower() == mealName.ToLower());
+        }
+
+        private void ValidateName(string name)
+        {
+            bool isNullOrWhiteSpace = CustomValidator.IsNullOrWhiteSpace(name);
+            if (isNullOrWhiteSpace)
+            {
+                string result = string.Format(ExceptionMessages.NAME_CANNOT_BE_NULL);
+                throw new Exception(result);
+            }
         }
     }
 }

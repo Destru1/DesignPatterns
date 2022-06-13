@@ -21,8 +21,6 @@ namespace RestaurantApp.Factories
 
             Client client = new Client(name, 0);
 
-         
-           // writer.WriteLine($" Client registered {client.Name}");
             return client;
 
             

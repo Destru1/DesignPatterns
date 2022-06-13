@@ -1,4 +1,5 @@
 ﻿using RestaurantApp.Commands.Interfaces;
+using RestaurantApp.Constants;
 using RestaurantApp.Models;
 using RestaurantApp.Models.Interfaces;
 using System;
@@ -11,10 +12,10 @@ namespace RestaurantApp.Commands
     {
         public string Execute(IRestaurant restaurant, params string[] arguments)
         {
+            string message = string.Format(OutputMessages.SHUTDOWN_APP);
+            restaurant.EarnedToday();
             GlobalConstants.IsAppRun = false;
-            string message = "Shutting down app.";
             return message;
-            //Todo add constant message
            
         }
     }

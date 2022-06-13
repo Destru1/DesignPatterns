@@ -1,4 +1,5 @@
 ﻿using RestaurantApp.Commands.Interfaces;
+using RestaurantApp.Constants;
 using RestaurantApp.Models.Clients;
 using RestaurantApp.Models.Interfaces;
 using System;
@@ -21,11 +22,11 @@ namespace RestaurantApp.Commands
 
             if (tipAmount < 0)
             {
-                message = $"Client {client.Name} tried to take {Math.Abs(tipAmount)}$.";
+                message = string.Format(ExceptionMessages.CLIENT_TRIED_TO_TAKE_MONEY,clientName,Math.Abs(tipAmount));
             }
             else
             {
-                message = $"{client.Name} tipped {tipAmount}$";
+                message = string.Format(OutputMessages.CLIENT_TIPPED, clientName, tipAmount);
             }
             
             return message;

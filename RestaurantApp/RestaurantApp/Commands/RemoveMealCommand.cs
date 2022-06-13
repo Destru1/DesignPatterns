@@ -1,4 +1,5 @@
 ﻿using RestaurantApp.Commands.Interfaces;
+using RestaurantApp.Constants;
 using RestaurantApp.Models.Clients;
 using RestaurantApp.Models.Interfaces;
 using System;
@@ -17,7 +18,7 @@ namespace RestaurantApp.Commands
             IClient client = restaurant.FindClientByName(clientName);
             client.RemoveMeal(mealName);
 
-            string message = $"{mealName} removed.";
+            string message = string.Format(OutputMessages.MEAL_REMOVED_FROM_CLIENT, mealName, clientName);
             return message;
 
         }
