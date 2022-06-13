@@ -47,6 +47,16 @@ namespace RestaurantApp.Models.Clients
             this.meals.Add(meal);
         }
 
+        public void Tip(decimal amount)
+        {
+            if (amount > 0)
+            {
+                this.balance += amount;
+
+            }
+   
+
+        }
         public void RemoveMeal(string mealName)
         {
             Meal meal = this.FindMealByName(mealName);
@@ -60,7 +70,7 @@ namespace RestaurantApp.Models.Clients
             this.meals.Remove(meal);
             this.Restaurant.RemoveMealFromClient(this, meal);
         }
-
+       
         private Meal FindMealByName(string mealName)
         {
             return this.meals.FirstOrDefault(m => m.Name.ToLower() == mealName.ToLower());

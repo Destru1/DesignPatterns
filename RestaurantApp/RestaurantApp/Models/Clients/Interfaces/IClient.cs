@@ -14,6 +14,8 @@ namespace RestaurantApp.Models.Clients
         public IRestaurant Restaurant { get; set; }
         void GetMeal(string name);
 
+        void Tip(decimal amount);
+
         void RemoveMeal(string name);
 
     }

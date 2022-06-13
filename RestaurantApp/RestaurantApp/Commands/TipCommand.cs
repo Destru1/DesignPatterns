@@ -7,18 +7,30 @@ using System.Text;
 
 namespace RestaurantApp.Commands
 {
-    public class RemoveCommand : ICommand
+    public class TipCommand : ICommand
     {
         public string Execute(IRestaurant restaurant, params string[] arguments)
         {
             string clientName = arguments[0].ToString();
-            string mealName = arguments[1].ToString();
+            decimal tipAmount = decimal.Parse((string)arguments[1]);
 
             IClient client = restaurant.FindClientByName(clientName);
-            client.RemoveMeal(mealName);
+            client.Tip(tipAmount);
 
-            string message = $"{mealName} removed.";
+            string message = string.Empty;
+
+            if (tipAmount < 0)
+            {
+                message = $"Client {client.Name} tried to take {Math.Abs(tipAmount)}$.";
+            }
+            else
+            {
+                message = $"{client.Name} tipped {tipAmount}$";
+            }
+            
             return message;
+
+
 
         }
     }
