@@ -1,6 +1,6 @@
 # DesignPatterns
 # About the application
-<p>The application represents a restaurant where clients are registered.After that they can order,check their current order, tip and remove meal form their order.</p>
+<p>The application represents a restaurant where clients are registered. After that, they can order, check their current order, tip, and remove meals from their order.</p>
 
 ## Implemented design patterns
 * Creational patterns
@@ -63,4 +63,5 @@ Today's total: 38.49$.
 Shutting down app...
 
 ```
+
 
