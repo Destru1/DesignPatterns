@@ -1,8 +1,5 @@
 ﻿using RestaurantApp.Models.Clients;
 using RestaurantApp.Models.Meals;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RestaurantApp.Models.Interfaces
 {
@@ -12,7 +9,7 @@ namespace RestaurantApp.Models.Interfaces
 
         Meal BuyMeal(Client client, string mealName);
 
-        void RemoveMealFromClient(Client client,Meal meal);
+        void RemoveMealFromClient(Client client, Meal meal);
 
         string ShowClientBill(string clientName);
 

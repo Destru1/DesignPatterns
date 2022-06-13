@@ -1,10 +1,6 @@
 ﻿using RestaurantApp.Commands.Interfaces;
 using RestaurantApp.Constants;
-using RestaurantApp.Models;
 using RestaurantApp.Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RestaurantApp.Commands
 {
@@ -16,7 +12,7 @@ namespace RestaurantApp.Commands
             restaurant.EarnedToday();
             GlobalConstants.IsAppRun = false;
             return message;
-           
+
         }
     }
 }

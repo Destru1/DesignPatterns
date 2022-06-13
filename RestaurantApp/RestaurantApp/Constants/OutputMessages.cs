@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RestaurantApp.Constants
+﻿namespace RestaurantApp.Constants
 {
     public static class OutputMessages
     {

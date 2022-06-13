@@ -1,8 +1,4 @@
-﻿using RestaurantApp.Models;
-using RestaurantApp.Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using RestaurantApp.Models.Interfaces;
 
 namespace RestaurantApp.Commands.Interfaces
 {

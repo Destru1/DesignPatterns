@@ -1,12 +1,7 @@
 ﻿using RestaurantApp.Commands.Interfaces;
 using RestaurantApp.Factories;
-using RestaurantApp.IO.Interfaces;
-using RestaurantApp.Models;
 using RestaurantApp.Models.Clients;
 using RestaurantApp.Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RestaurantApp.Commands
 {
@@ -22,7 +17,7 @@ namespace RestaurantApp.Commands
         {
             Client client = this.client.Create(arguments);
 
-            string message = restaurant.RegisterClient(client); 
+            string message = restaurant.RegisterClient(client);
             return message;
 
         }

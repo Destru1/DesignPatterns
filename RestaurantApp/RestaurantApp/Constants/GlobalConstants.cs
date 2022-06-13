@@ -1,11 +1,9 @@
 ﻿using RestaurantApp.Models.Meals;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RestaurantApp
 {
-   public static class GlobalConstants
+    public static class GlobalConstants
     {
         public static List<Meal> Meals = new List<Meal>()
         {
@@ -17,7 +15,7 @@ namespace RestaurantApp
             new Pizza("Prosciutto",10.20m),
             new Salad("CesarSalad",10.50m),
             new Salad("GreekSalad",7.40m),
-            new Salad("ShopskaSalad",6.20m),    
+            new Salad("ShopskaSalad",6.20m),
         };
 
 

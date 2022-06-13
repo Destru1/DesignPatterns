@@ -3,8 +3,6 @@ using RestaurantApp.Constants;
 using RestaurantApp.Models.Clients;
 using RestaurantApp.Models.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RestaurantApp.Commands
 {
@@ -22,13 +20,13 @@ namespace RestaurantApp.Commands
 
             if (tipAmount < 0)
             {
-                message = string.Format(ExceptionMessages.CLIENT_TRIED_TO_TAKE_MONEY,clientName,Math.Abs(tipAmount));
+                message = string.Format(ExceptionMessages.CLIENT_TRIED_TO_TAKE_MONEY, clientName, Math.Abs(tipAmount));
             }
             else
             {
                 message = string.Format(OutputMessages.CLIENT_TIPPED, clientName, tipAmount);
             }
-            
+
             return message;
 
 

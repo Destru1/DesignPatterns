@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RestaurantApp.Models.Meals
+﻿namespace RestaurantApp.Models.Meals
 {
     public abstract class Meal
     {

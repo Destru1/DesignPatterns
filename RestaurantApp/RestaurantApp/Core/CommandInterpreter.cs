@@ -1,9 +1,7 @@
 ﻿using RestaurantApp.Commands.Interfaces;
 using RestaurantApp.Factories;
 using RestaurantApp.Factories.Interfaces;
-using RestaurantApp.Models;
 using RestaurantApp.Models.Interfaces;
-using System;
 using System.Linq;
 
 namespace RestaurantApp.Core
@@ -12,11 +10,11 @@ namespace RestaurantApp.Core
     {
         private readonly IRestaurant restaurant;
         private readonly IFactory<ICommand> commandFactory;
-            
+
 
         public CommandInterpreter(IRestaurant restaurant)
         {
-            
+
             this.restaurant = restaurant;
             this.commandFactory = new CommandFactory();
         }
@@ -33,8 +31,8 @@ namespace RestaurantApp.Core
             string result = command.Execute(this.restaurant, arguments);
             return result;
 
-        
-             
+
+
         }
     }
 }

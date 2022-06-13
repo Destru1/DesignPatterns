@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RestaurantApp.Helpers
+﻿namespace RestaurantApp.Helpers
 {
     public static class CustomValidator
     {
