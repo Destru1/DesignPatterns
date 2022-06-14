@@ -9,7 +9,7 @@
     * Facade
 * Behavioral patterns
     * Command
-    * Observer
+    
 
 ## Commands
 * Register [ClientName]
